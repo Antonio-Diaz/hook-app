@@ -15,12 +15,16 @@ export const MultipleCustomHook = () => {
       {loading ? (
         <div className="alert alert-info text-center">...loading</div>
       ) : (
-        <blockquote className="blockquote text-center">
+        <blockquote className="blockquote text-right">
           <p className="mb-2"> {quote} </p>
           <footer className="blockquote-footer">{author}</footer>
         </blockquote>
       )}
-      <button className="btn btn-primary" onClick={decrement}>
+      <button
+        className="btn btn-primary"
+        onClick={decrement}
+        disabled={counter === 1 ? true : false}
+      >
         previous Quote
       </button>
       <button className="btn btn-primary" onClick={reset}>
