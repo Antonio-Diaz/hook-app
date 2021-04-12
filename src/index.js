@@ -7,6 +7,8 @@ import ReactDOM from 'react-dom'
 // import { SimpleForm } from "./components/02-useEffect/SimpleForm";
 // import { HookApp } from "./HookApp";
 // import { FocusScreen } from './components/04-useRef/FocusScreen';
-import { RealExampleRef } from './components/04-useRef/RealExampleRef';
+// import { RealExampleRef } from './components/04-useRef/RealExampleRef';
+// import { LayoutEffect } from './components/05-useLayoutEffec/LayoutEffect';
+import { Memorize } from './components/06-useMemo/Memorize';
 
-ReactDOM.render(<RealExampleRef />, document.getElementById('root'))
+ReactDOM.render(<Memorize />, document.getElementById('root'))
