@@ -1,25 +1,41 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 
 import { todoReducer } from "./todoReducer";
 import { useFrom } from "../../Hooks/useFrom";
 import "./styles.css";
+import { TodoList } from "./TodoList";
+import { TodoAdd } from "./TodoAdd";
 
-const initialState = [
-  {
-    id: new Date().getTime(),
-    desc: "Learn React",
-    done: false,
-  },
-];
+const init = () => {
+  return JSON.parse(localStorage.getItem("todos")) || [];
+};
 
 export const TodoApp = () => {
-  const [todos, dispatch] = useReducer(todoReducer, initialState);
+  const [todos, dispatch] = useReducer(todoReducer, [], init);
 
   const [{ description }, handleInputChange] = useFrom({
     description: "",
   });
 
-  console.log(description);
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
+
+  const handleDelete = (todoId) => {
+    const action = {
+      type: "delete",
+      payload: todoId,
+    };
+    dispatch(action);
+  };
+
+  const handleToggle = (todoId) => {
+    const action = {
+      type: "toggle",
+      payload: todoId,
+    };
+    dispatch(action);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -44,38 +60,18 @@ export const TodoApp = () => {
 
       <div className="row">
         <div className="col-7">
-          <ul className="list-group list-group-flush">
-            {todos.map((todo, index) => (
-              <li key={todo.id} className="list-group-item">
-                <p className="text-center">
-                  {index + 1}.- {todo.desc}
-                </p>
-                <button className="btn btn-danger">Delete</button>
-              </li>
-            ))}
-          </ul>
+          <TodoList
+            todos={todos}
+            handleDelete={handleDelete}
+            handleToggle={handleToggle}
+          />
         </div>
         <div className="col-5">
-          <h4>Add Todo </h4>
-          <hr />
-
-          <form onSubmit={handleSubmit}>
-            <input
-              type="text"
-              name="description"
-              className="form-control"
-              placeholder="learn..."
-              autoComplete="off"
-              onChange={handleInputChange}
-              value={description}
-            />
-            <button
-              type="submit"
-              className="btn btn-outline-primary mt-1 btn-block"
-            >
-              Add Todo
-            </button>
-          </form>
+          <TodoAdd
+            description={description}
+            handleSubmit={handleSubmit}
+            handleInputChange={handleInputChange}
+          />
         </div>
       </div>
     </div>
