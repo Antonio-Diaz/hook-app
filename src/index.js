@@ -11,6 +11,7 @@ import ReactDOM from 'react-dom'
 // import { RealExampleRef } from './components/04-useRef/RealExampleRef';
 // import { LayoutEffect } from './components/05-useLayoutEffec/LayoutEffect';
 // import { Memorize } from './components/06-useMemo/Memorize';
-import { CallbackHook } from './components/06-useMemo/CallbackHook';
+// import { CallbackHook } from './components/06-useMemo/CallbackHook';
+import { Padre } from './components/07-tarea-memo/Padre';
 
-ReactDOM.render(<CallbackHook />, document.getElementById('root'))
+ReactDOM.render(<Padre />, document.getElementById('root'))
