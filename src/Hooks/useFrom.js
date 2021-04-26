@@ -10,5 +10,9 @@ export const useFrom = (initialState = {}) => {
     });
   };
 
-  return [values, handleInputChange];
+  const reset = () => {
+    setValues({});
+  };
+
+  return [values, handleInputChange, reset];
 };
